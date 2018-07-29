@@ -60,7 +60,7 @@ class Rover(Robot, Connections):
 
 	def takeTurn(self, arclength, left):
 		wait = arclength
-		r = 78.4
+		r = 90
 		if left == 0:
 			r *=-1
 		self.sendCommands(100, r)

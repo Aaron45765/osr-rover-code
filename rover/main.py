@@ -110,7 +110,7 @@ def main():
         rover.takeTurn(arccommands[x], directional[x])
     
     rover.takeStraight(straightcommands[len(straightcommands)-1])
-
+    rover.cleanup()
 
 
 if __name__ == '__main__':
