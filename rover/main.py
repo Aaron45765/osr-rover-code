@@ -58,6 +58,7 @@ def main():
     linelengths = [0 for x in range(len(vectors))]
     straightcommands = [0 for x in range(len(vectors))]
     arccommands = [0 for x in range(len(angles))]
+    directional = [0 for x in range(len(angles))]
     truncated = [0 for x in range(len(angles))]
 
     for x in range(1, len(points)):
@@ -74,6 +75,14 @@ def main():
         linelengths[x] = math.sqrt(vectors[x][0]**2 + vectors[x][1]**2)
     for x in range(len(angles)):
         truncated[x] = turning_radius*math.sqrt(1.0+cosines[x])/(math.sqrt(1.0-cosines[x]))
+        for x in range(len(points)-2):
+        newvec = [0,0]
+        newvec[0] = points[x+2][0]-points[x][0]
+        newvec[1] = points[x+2][1]-points[x][1]
+        if vectors[x][0]*newvec[1]-vectors[x][1]*newvec[0]>0:
+            directional[x]=0
+        else:
+            directional[x]=1
 
 
     for x in range(len(linelengths)):
@@ -94,6 +103,14 @@ def main():
 
     for x in range(len(arccommands)):
         arccommands[x] = angles[x] * turning_radius
+
+    for x in range(len(arccommands)):
+        rover.takeStraight(straightcommands[x])
+        rover.takeTurn(arccommands[x], directional[x])
+    
+    rover.takeStraight(straightcommands[len(straightcommands)-1])
+
+
 
 if __name__ == '__main__':
     main()

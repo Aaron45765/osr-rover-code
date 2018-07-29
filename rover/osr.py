@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from robot import Robot
 from connections import Connections
-
+import time
 class Rover(Robot, Connections):
 	'''
 	Rover class manages connections from the sockets and remote devices 
@@ -35,7 +35,7 @@ class Rover(Robot, Connections):
 		elif bt_flag:   self.connection_type = "b"
 		elif xbox_flag: self.connection_type = "x"
 			
-		self.connectController()
+		#self.connectController()
 	
 	def drive(self):
 		'''
@@ -50,6 +50,24 @@ class Rover(Robot, Connections):
 			self.cornerPosControl(self.calculateTargetDeg(cmds[1]))
 
 		if self.unix_flag: self.sendFaceCmd()
+
+	def takeStraight(self, length):
+		wait = length
+		self.sendCommands(100, 0)
+		while(length > 0):
+			length -= .01
+			time.sleep(.01)
+
+	def takeTurn(self, arclength, left):
+		wait = arclength
+		r = 78.4
+		if left == 0:
+			r *=-1
+		self.sendCommands(100, r)
+		
+
+
+		
 
 	def sendFaceCmd(self):
 		'''
