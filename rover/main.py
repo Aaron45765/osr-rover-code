@@ -15,7 +15,7 @@ This code runs the JPL Open Source Rover. It accepts a few command line argument
 
 An example line running this script to run the LED screen and with an Xbox controller
     sudo python main.py -s -x
-'''
+''' 
 
 
 def main():
@@ -49,6 +49,7 @@ def main():
         alone+=coord
     for x in range(0,len(alone),2):
         points.append([float(alone[x]),float(alone[x+1])])
+    print points 
     turning_radius = 2
     # we get these things
     vectors = [[0 for x in range(2)] for x in range(len(points)-1)]
