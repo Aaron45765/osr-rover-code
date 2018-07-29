@@ -20,7 +20,7 @@ An example line running this script to run the LED screen and with an Xbox contr
 
 def main():
     args = Arguments()
-    with open('/home/pi/os/rover/config.json') as f:
+    with open('config.json') as f:
         config = json.load(f)
 
     rover = Rover(config,args.bt_flag,args.xbox_flag,args.unix_flag)
@@ -76,9 +76,9 @@ def main():
     for x in range(len(angles)):
         truncated[x] = turning_radius*math.sqrt(1.0+cosines[x])/(math.sqrt(1.0-cosines[x]))
         for x in range(len(points)-2):
-        newvec = [0,0]
-        newvec[0] = points[x+2][0]-points[x][0]
-        newvec[1] = points[x+2][1]-points[x][1]
+            newvec = [0,0]
+            newvec[0] = points[x+2][0]-points[x][0]
+            newvec[1] = points[x+2][1]-points[x][1]
         if vectors[x][0]*newvec[1]-vectors[x][1]*newvec[0]>0:
             directional[x]=0
         else:
